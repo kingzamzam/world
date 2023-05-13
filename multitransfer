@@ -1,0 +1,23 @@
+contract WalletTransfer {
+    address payable public A1 = payable(<A1_wallet_address>);
+    address payable public A2 = payable(<A2_wallet_address>);
+    address payable public A3 = payable(<A3_wallet_address>);
+    address payable public A4 = payable(<A4_wallet_address>);
+    address payable public A5 = payable(<A5_wallet_address>);
+    
+    function transfer() public {
+        require(msg.sender == A1, "Only A1 wallet can initiate this transfer");
+        
+        uint256 amount1 = 0.1 ether;
+        uint256 amount2 = 0.07 ether;
+        uint256 amount3 = 0.002 ether;
+        
+        A2.transfer(amount1);
+        A3.transfer(amount2);
+        A4.transfer(amount3);
+        
+        A3.transfer(A3.balance);
+        A4.transfer(A4.balance);
+        A5.transfer(A3.balance + A4.balance);
+    }
+}
